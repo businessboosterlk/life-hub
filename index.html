@@ -319,6 +319,62 @@ a{color:var(--accent);text-decoration:none}
 /* Smooth transitions */
 .page{animation:fadeIn .3s ease}
 @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+/* Search results dropdown */
+.search-results{position:absolute;top:100%;left:0;right:0;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius2);box-shadow:var(--shadow2);max-height:360px;overflow-y:auto;z-index:200;margin-top:4px;display:none}
+.search-results.show{display:block}
+.search-result-item{padding:10px 14px;border-bottom:1px solid var(--border);cursor:pointer;font-size:.84rem;display:flex;align-items:center;gap:10px;transition:background .15s}
+.search-result-item:hover{background:var(--bg3)}
+.search-result-item:last-child{border-bottom:none}
+.search-result-type{font-size:.68rem;text-transform:uppercase;letter-spacing:.5px;color:var(--accent);font-weight:600;min-width:50px}
+.search-result-title{flex:1;font-weight:500}
+.search-result-sub{font-size:.75rem;color:var(--text3)}
+
+/* Notification dropdown */
+.notif-dropdown{position:absolute;top:100%;right:0;width:340px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow2);max-height:400px;overflow-y:auto;z-index:200;margin-top:8px;display:none}
+.notif-dropdown.show{display:block}
+.notif-header{padding:12px 16px;border-bottom:1px solid var(--border);font-weight:600;font-size:.9rem;display:flex;justify-content:space-between;align-items:center}
+.notif-item{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:10px;transition:background .15s;cursor:pointer}
+.notif-item:hover{background:var(--bg3)}
+.notif-item:last-child{border-bottom:none}
+.notif-dot{width:8px;height:8px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.notif-text{flex:1}
+.notif-text .nt-title{font-size:.84rem;font-weight:500;margin-bottom:2px}
+.notif-text .nt-sub{font-size:.75rem;color:var(--text3)}
+.notif-dismiss{padding:4px;border-radius:4px;color:var(--text3);cursor:pointer;flex-shrink:0}
+.notif-dismiss:hover{background:var(--bg3);color:var(--text)}
+.notif-badge{position:absolute;top:4px;right:4px;min-width:16px;height:16px;background:var(--red);border-radius:99px;color:#fff;font-size:.65rem;font-weight:700;display:flex;align-items:center;justify-content:center;padding:0 4px;border:2px solid var(--bg2)}
+.notif-empty{padding:24px;text-align:center;color:var(--text3);font-size:.85rem}
+
+/* Category badge (library) */
+.badge-category{background:var(--accent-light);color:var(--accent);font-size:.68rem;padding:3px 8px;border-radius:99px;font-weight:600}
+
+/* Star rating */
+.star-rating{display:inline-flex;gap:2px;cursor:pointer}
+.star-rating .star{color:var(--border);font-size:1.1rem;transition:color .15s}
+.star-rating .star.filled{color:#f39c12}
+
+/* Project inline tasks */
+.kanban-tasks-list{padding:8px 0 4px;border-top:1px solid var(--border);margin-top:8px;display:none}
+.kanban-tasks-list.show{display:block}
+.kanban-task-item{display:flex;align-items:center;gap:6px;padding:4px 0;font-size:.78rem}
+.kanban-mini-progress{height:4px;background:var(--bg3);border-radius:99px;overflow:hidden;margin-top:4px}
+.kanban-mini-progress .progress-fill{height:100%;border-radius:99px}
+.kanban-quick-add{display:flex;gap:4px;margin-top:6px}
+.kanban-quick-add input{font-size:.78rem;padding:5px 8px}
+.kanban-quick-add button{font-size:.72rem;padding:4px 8px;white-space:nowrap}
+
+/* Review page week nav */
+.review-week-nav{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.review-week-nav .date-display{font-weight:600;font-size:1rem;min-width:220px;text-align:center}
+
+@media(max-width:768px){
+  .grid-4{grid-template-columns:1fr 1fr}
+  .search-results{position:fixed;left:8px;right:8px;top:70px;width:auto}
+  .notif-dropdown{position:fixed;left:8px;right:8px;top:70px;width:auto}
+  .review-week-nav{flex-wrap:wrap}
+  .chart-container svg{max-width:100%;height:auto}
+}
 </style>
 </head>
 <body>
@@ -362,6 +418,10 @@ a{color:var(--accent);text-decoration:none}
 <div class="nav-item" onclick="nav('library')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Library</div>
 </div>
 
+<div class="nav-group"><div class="nav-group-label">Insights</div>
+<div class="nav-item" onclick="nav('review')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>Review</div>
+</div>
+
 <div class="nav-group"><div class="nav-group-label">Life</div>
 <div class="nav-item" onclick="nav('finance')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>Finance</div>
 <div class="nav-item" onclick="nav('health')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>Health</div>
@@ -381,8 +441,8 @@ a{color:var(--accent);text-decoration:none}
 <span class="topbar-title" id="topbarTitle">Dashboard</span>
 </div>
 <div class="topbar-right">
-<div class="topbar-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" placeholder="Search..."></div>
-<div class="topbar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg><span class="topbar-notif"></span></div>
+<div class="topbar-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" id="globalSearchInput" placeholder="Search..." oninput="globalSearch()" onfocus="globalSearch()"><div class="search-results" id="searchResults"></div></div>
+<div class="topbar-icon" id="notifBell" onclick="toggleNotifDropdown()" style="position:relative"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg><span class="topbar-notif" id="notifBadge" style="display:none"></span><div class="notif-dropdown" id="notifDropdown"></div></div>
 <div class="topbar-user">
 <div class="tu-avatar">A</div>
 <div><div class="tu-name">Abhishek</div><div class="tu-role">Personal</div></div>
@@ -565,7 +625,10 @@ a{color:var(--accent);text-decoration:none}
 <div class="page" id="pg-library">
 <h1 class="page-title">Library</h1>
 <p class="page-sub">Track your reading journey</p>
-<div style="margin-bottom:16px"><button class="btn btn-primary" onclick="openBookModal()">+ Add Book</button></div>
+<div class="filter-bar">
+<button class="btn btn-primary" onclick="openBookModal()">+ Add Book</button>
+<select id="libCategoryFilter" onchange="renderLibrary()"><option value="">All Categories</option><option value="Fiction">Fiction</option><option value="Non-Fiction">Non-Fiction</option><option value="Self-Help">Self-Help</option><option value="Business">Business</option><option value="Science">Science</option><option value="Technology">Technology</option><option value="Biography">Biography</option><option value="Other">Other</option></select>
+</div>
 <div id="libraryStats" class="stats-row" style="margin-bottom:20px"></div>
 <div class="grid-3" id="libraryContent"></div>
 </div>
@@ -605,7 +668,10 @@ a{color:var(--accent);text-decoration:none}
 <div class="form-group"><label>Sleep (hrs)</label><input type="number" id="hSleep" placeholder="0" step="0.5"></div>
 <div class="form-group"><label>Water (glasses)</label><input type="number" id="hWater" placeholder="0"></div>
 </div>
+<div class="form-row">
+<div class="form-group"><label>Exercise (min)</label><input type="number" id="hExercise" placeholder="0"></div>
 <div class="form-group"><label>Notes</label><input type="text" id="hNote" placeholder="How are you feeling?"></div>
+</div>
 <button class="btn btn-primary" onclick="saveHealth()" style="margin-top:4px">Save Today's Log</button>
 </div>
 <div class="card">
@@ -628,6 +694,36 @@ a{color:var(--accent);text-decoration:none}
 <div class="card" style="margin-top:16px">
 <div class="card-header"><span class="card-title">History</span></div>
 <div id="healthHistory"></div>
+</div>
+</div>
+
+<!-- ============ REVIEW ============ -->
+<div class="page" id="pg-review">
+<h1 class="page-title">Weekly Review</h1>
+<p class="page-sub">Reflect on your week and plan ahead</p>
+<div class="review-week-nav">
+<button class="btn btn-sm btn-outline" onclick="shiftReviewWeek(-1)">&larr;</button>
+<span class="date-display" id="reviewWeekLabel"></span>
+<button class="btn btn-sm btn-outline" onclick="shiftReviewWeek(1)">&rarr;</button>
+<button class="btn btn-sm btn-outline" onclick="setReviewWeekToNow()">This Week</button>
+</div>
+<div class="stats-row" id="reviewStats"></div>
+<div class="grid-2" style="margin-bottom:16px">
+<div class="card"><div class="card-header"><span class="card-title">Task Completion</span></div><div id="reviewTaskChart"></div></div>
+<div class="card"><div class="card-header"><span class="card-title">Habits Completion</span></div><div id="reviewHabitChart"></div></div>
+</div>
+<div class="grid-2" style="margin-bottom:16px">
+<div class="card"><div class="card-header"><span class="card-title">Goals Movement</span></div><div id="reviewGoalsSection"></div></div>
+<div class="card"><div class="card-header"><span class="card-title">Finance Summary</span></div><div id="reviewFinSection"></div></div>
+</div>
+<div class="card" style="margin-bottom:16px">
+<div class="card-header"><span class="card-title">Schedule Overview</span></div>
+<div id="reviewScheduleChart"></div>
+</div>
+<div class="card">
+<div class="card-header"><span class="card-title">Weekly Notes</span></div>
+<textarea id="reviewNotes" rows="4" placeholder="Reflect on your week..."></textarea>
+<div style="display:flex;justify-content:flex-end;margin-top:8px"><button class="btn btn-primary" onclick="saveReviewNotes()">Save Notes</button></div>
 </div>
 </div>
 
@@ -744,7 +840,7 @@ function toggleTheme(){
 }
 if(localStorage.getItem('lh_theme')==='dark'){document.documentElement.classList.add('dark');document.getElementById('themeLabel').textContent='Light Mode'}
 
-const pageTitles={dashboard:'Dashboard',schedule:'Schedule',tasks:'Tasks',journal:'Journal',goals:'Goals',habits:'Habits',library:'Library',finance:'Finance',health:'Health',projects:'Projects'};
+const pageTitles={dashboard:'Dashboard',schedule:'Schedule',tasks:'Tasks',journal:'Journal',goals:'Goals',habits:'Habits',library:'Library',finance:'Finance',health:'Health',projects:'Projects',review:'Weekly Review'};
 let currentPage='dashboard';
 function nav(page){
   currentPage=page;
@@ -788,7 +884,7 @@ function loadPage(page){
     case'dashboard':renderDashboard();break;case'schedule':renderSchedule();break;case'tasks':renderTasks();break;
     case'journal':renderJournal();break;case'goals':renderGoals();break;case'habits':renderHabits();break;
     case'library':renderLibrary();break;case'finance':renderFinance();break;case'health':renderHealth();break;
-    case'projects':renderProjects();break;
+    case'projects':renderProjects();break;case'review':renderReview();break;
   }
 }
 
@@ -982,8 +1078,8 @@ function renderSchedule(){
 function shiftSchedDate(n){const d=new Date(schedDate+'T00:00:00');d.setDate(d.getDate()+n);schedDate=d.toISOString().split('T')[0];renderSchedule()}
 function setSchedDate(v){schedDate=v;renderSchedule()}
 async function toggleSchedItem(id){const item=schedItems.find(s=>s.id===id);if(!item)return;item.completed=!item.completed;await sbPatch('daily_items',`id=eq.${id}`,{completed:item.completed});renderSchedule();if(currentPage==='dashboard')renderDashboard()}
-function openSchedModal(id){const item=id?schedItems.find(s=>s.id===id):null;openModal(`<h3>${item?'Edit':'Add'} Schedule Item</h3><div class="form-row"><div class="form-group"><label>Date</label><input type="date" id="mSchedDate" value="${item?item.date:schedDate}"></div><div class="form-group"><label>Time</label><input type="time" id="mSchedTime" value="${item?item.time||'':''}"></div></div><div class="form-group"><label>Title</label><input type="text" id="mSchedTitle" value="${item?escHtml(item.title):''}"></div><div class="form-group"><label>Subtitle</label><input type="text" id="mSchedSub" value="${item?escHtml(item.subtitle||''):''}"></div><div class="form-actions"><button class="btn btn-outline" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="saveSchedItem('${id||''}')">Save</button></div>`)}
-async function saveSchedItem(id){const data={date:document.getElementById('mSchedDate').value,time:document.getElementById('mSchedTime').value||null,title:document.getElementById('mSchedTitle').value.trim(),subtitle:document.getElementById('mSchedSub').value.trim()||null};if(!data.title)return toast('Title required',true);if(id){await sbPatch('daily_items',`id=eq.${id}`,data);Object.assign(schedItems.find(s=>s.id===id),data)}else{const r=await sbPost('daily_items',data);schedItems.push(r[0])}closeModal();renderSchedule();toast('Saved!')}
+function openSchedModal(id){const item=id?schedItems.find(s=>s.id===id):null;openModal(`<h3>${item?'Edit':'Add'} Schedule Item</h3><div class="form-row"><div class="form-group"><label>Date</label><input type="date" id="mSchedDate" value="${item?item.date:schedDate}"></div><div class="form-group"><label>Time</label><input type="time" id="mSchedTime" value="${item?item.time||'':''}"></div></div><div class="form-group"><label>Title</label><input type="text" id="mSchedTitle" value="${item?escHtml(item.title):''}"></div><div class="form-group"><label>Subtitle</label><input type="text" id="mSchedSub" value="${item?escHtml(item.subtitle||''):''}"></div><div class="form-group"><label>Remind me</label><select id="mSchedReminder"><option value="" ${!item||!item.reminder_minutes?'selected':''}>None</option><option value="5" ${item&&item.reminder_minutes===5?'selected':''}>5 min before</option><option value="15" ${item&&item.reminder_minutes===15?'selected':''}>15 min before</option><option value="30" ${item&&item.reminder_minutes===30?'selected':''}>30 min before</option><option value="60" ${item&&item.reminder_minutes===60?'selected':''}>1 hour before</option></select></div><div class="form-actions"><button class="btn btn-outline" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="saveSchedItem('${id||''}')">Save</button></div>`)}
+async function saveSchedItem(id){const data={date:document.getElementById('mSchedDate').value,time:document.getElementById('mSchedTime').value||null,title:document.getElementById('mSchedTitle').value.trim(),subtitle:document.getElementById('mSchedSub').value.trim()||null,reminder_minutes:Number(document.getElementById('mSchedReminder').value)||null};if(!data.title)return toast('Title required',true);if(id){await sbPatch('daily_items',`id=eq.${id}`,data);Object.assign(schedItems.find(s=>s.id===id),data)}else{const r=await sbPost('daily_items',data);schedItems.push(r[0])}closeModal();renderSchedule();toast('Saved!')}
 async function deleteSchedItem(id){if(!confirm('Delete this item?'))return;await sbDelete('daily_items',`id=eq.${id}`);schedItems=schedItems.filter(s=>s.id!==id);renderSchedule();toast('Deleted')}
 
 /* ===== TASKS ===== */
@@ -1020,9 +1116,12 @@ function renderTasks(){
       <button class="btn-icon" onclick="deleteTask('${t.id}')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg></button>
     </div>`;}).join(''):'<p style="color:var(--text3);padding:20px;text-align:center">No tasks found</p>';
 }
-async function toggleTask(id){const t=allTasks.find(x=>x.id===id);if(!t)return;t.completed=!t.completed;await sbPatch('tasks',`id=eq.${id}`,{completed:t.completed});renderTasks();if(currentPage==='dashboard')renderDashboard()}
-function openTaskModal(id){const t=id?allTasks.find(x=>x.id===id):null;openModal(`<h3>${t?'Edit':'Add'} Task</h3><div class="form-group"><label>Title</label><input type="text" id="mTaskTitle" value="${t?escHtml(t.title):''}"></div><div class="form-group"><label>Description</label><textarea id="mTaskDesc">${t?escHtml(t.description||''):''}</textarea></div><div class="form-row"><div class="form-group"><label>Priority</label><select id="mTaskPrio"><option value="high" ${t&&t.priority==='high'?'selected':''}>High</option><option value="medium" ${!t||t.priority==='medium'?'selected':''}>Medium</option><option value="low" ${t&&t.priority==='low'?'selected':''}>Low</option></select></div><div class="form-group"><label>Due Date</label><input type="date" id="mTaskDue" value="${t?t.due_date||'':''}"></div></div><div class="form-group"><label>Project</label><select id="mTaskProj"><option value="">None</option>${allProjects.map(p=>`<option value="${p.id}" ${t&&t.project_id===p.id?'selected':''}>${escHtml(p.title)}</option>`).join('')}</select></div><div class="form-actions"><button class="btn btn-outline" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="saveTask('${id||''}')">Save</button></div>`)}
-async function saveTask(id){const data={title:document.getElementById('mTaskTitle').value.trim(),description:document.getElementById('mTaskDesc').value.trim()||null,priority:document.getElementById('mTaskPrio').value,due_date:document.getElementById('mTaskDue').value||null,project_id:document.getElementById('mTaskProj').value||null};if(!data.title)return toast('Title required',true);if(id){await sbPatch('tasks',`id=eq.${id}`,data);Object.assign(allTasks.find(t=>t.id===id),data)}else{const r=await sbPost('tasks',data);allTasks.push(r[0])}closeModal();renderTasks();toast('Saved!')}
+async function toggleTask(id){const t=allTasks.find(x=>x.id===id);if(!t)return;t.completed=!t.completed;await sbPatch('tasks',`id=eq.${id}`,{completed:t.completed});
+  // Goal linking: auto-update goal current_value
+  if(t.goal_id){const g=allGoals.find(x=>x.id===t.goal_id);if(g){if(t.completed){g.current_value=Math.min((g.current_value||0)+1,g.target_value);if(g.current_value>=g.target_value)g.active=false}else{g.current_value=Math.max((g.current_value||0)-1,0);g.active=true}await sbPatch('goals',`id=eq.${g.id}`,{current_value:g.current_value,active:g.active})}}
+  renderTasks();if(currentPage==='dashboard')renderDashboard()}
+function openTaskModal(id){const t=id?allTasks.find(x=>x.id===id):null;const activeGoals=allGoals.filter(g=>g.active);openModal(`<h3>${t?'Edit':'Add'} Task</h3><div class="form-group"><label>Title</label><input type="text" id="mTaskTitle" value="${t?escHtml(t.title):''}"></div><div class="form-group"><label>Description</label><textarea id="mTaskDesc">${t?escHtml(t.description||''):''}</textarea></div><div class="form-row"><div class="form-group"><label>Priority</label><select id="mTaskPrio"><option value="high" ${t&&t.priority==='high'?'selected':''}>High</option><option value="medium" ${!t||t.priority==='medium'?'selected':''}>Medium</option><option value="low" ${t&&t.priority==='low'?'selected':''}>Low</option></select></div><div class="form-group"><label>Due Date</label><input type="date" id="mTaskDue" value="${t?t.due_date||'':''}"></div></div><div class="form-row"><div class="form-group"><label>Project</label><select id="mTaskProj"><option value="">None</option>${allProjects.map(p=>`<option value="${p.id}" ${t&&t.project_id===p.id?'selected':''}>${escHtml(p.title)}</option>`).join('')}</select></div><div class="form-group"><label>Goal</label><select id="mTaskGoal"><option value="">None</option>${activeGoals.map(g=>`<option value="${g.id}" ${t&&t.goal_id===g.id?'selected':''}>${escHtml(g.title)}</option>`).join('')}</select></div></div><div class="form-actions"><button class="btn btn-outline" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="saveTask('${id||''}')">Save</button></div>`)}
+async function saveTask(id){const data={title:document.getElementById('mTaskTitle').value.trim(),description:document.getElementById('mTaskDesc').value.trim()||null,priority:document.getElementById('mTaskPrio').value,due_date:document.getElementById('mTaskDue').value||null,project_id:document.getElementById('mTaskProj').value||null,goal_id:document.getElementById('mTaskGoal').value||null};if(!data.title)return toast('Title required',true);if(id){await sbPatch('tasks',`id=eq.${id}`,data);Object.assign(allTasks.find(t=>t.id===id),data)}else{const r=await sbPost('tasks',data);allTasks.push(r[0])}closeModal();renderTasks();toast('Saved!')}
 async function deleteTask(id){if(!confirm('Delete this task?'))return;await sbDelete('tasks',`id=eq.${id}`);allTasks=allTasks.filter(t=>t.id!==id);renderTasks();toast('Deleted')}
 
 /* ===== JOURNAL ===== */
@@ -1076,7 +1175,7 @@ function renderGoals(){
     <div class="stat-card stat-grad grad-orange"><div class="stat-label">Avg Progress</div><div class="stat-value">${avgPct}%</div></div>
     <div class="stat-card stat-grad grad-purple"><div class="stat-label">Total Goals</div><div class="stat-value">${allGoals.length}</div></div>`;
 
-  let html=active.map(g=>{const pct=g.target_value?Math.round(g.current_value/g.target_value*100):0;return`<div class="card" style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><h3 style="font-size:1rem">${escHtml(g.title)}</h3><div style="display:flex;gap:4px"><button class="btn btn-sm btn-outline" onclick="openGoalProgress('${g.id}')">Update</button><button class="btn-icon" onclick="openGoalModal('${g.id}')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button><button class="btn-icon" onclick="deleteGoal('${g.id}')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg></button></div></div><div style="display:flex;justify-content:space-between;font-size:.85rem;margin-bottom:6px"><span>${pct}% complete</span><span style="color:var(--text3)">${g.current_value} / ${g.target_value} ${escHtml(g.unit||'')}</span></div><div class="progress-bar" style="height:10px"><div class="progress-fill" style="width:${Math.min(pct,100)}%;background:linear-gradient(90deg,#0d9488,#065f56)"></div></div></div>`}).join('');
+  let html=active.map(g=>{const pct=g.target_value?Math.round(g.current_value/g.target_value*100):0;const linkedTasks=allTasks.filter(t=>t.goal_id===g.id);const linkedDone=linkedTasks.filter(t=>t.completed).length;return`<div class="card" style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><h3 style="font-size:1rem">${escHtml(g.title)}</h3><div style="display:flex;gap:4px"><button class="btn btn-sm btn-outline" onclick="openGoalProgress('${g.id}')">Update</button><button class="btn-icon" onclick="openGoalModal('${g.id}')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button><button class="btn-icon" onclick="deleteGoal('${g.id}')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg></button></div></div><div style="display:flex;justify-content:space-between;font-size:.85rem;margin-bottom:6px"><span>${pct}% complete</span><span style="color:var(--text3)">${g.current_value} / ${g.target_value} ${escHtml(g.unit||'')}</span></div><div class="progress-bar" style="height:10px"><div class="progress-fill" style="width:${Math.min(pct,100)}%;background:linear-gradient(90deg,#0d9488,#065f56)"></div></div>${linkedTasks.length?`<div style="font-size:.78rem;color:var(--text2);margin-top:8px">Linked tasks: ${linkedDone}/${linkedTasks.length} completed</div>`:''}</div>`}).join('');
   if(completed.length){html+=`<h3 style="margin:24px 0 12px;font-size:.95rem;color:var(--text3)">Completed Goals</h3>`;html+=completed.map(g=>`<div class="card" style="margin-bottom:8px;opacity:.7"><div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:.9rem">${escHtml(g.title)}</span><span class="badge badge-status">Done</span></div></div>`).join('')}
   document.getElementById('goalsList').innerHTML=html||'<p style="color:var(--text3)">No goals yet. Click + Add Goal to start.</p>';
 
@@ -1130,14 +1229,22 @@ async function deleteHabit(id){if(!confirm('Delete this habit and all its logs?'
 
 /* ===== LIBRARY ===== */
 function renderLibrary(){
-  const reading=allBooks.filter(b=>b.status==='reading');const want=allBooks.filter(b=>b.status==='want_to_read');const done=allBooks.filter(b=>b.status==='completed');
-  const totalPages=done.reduce((s,b)=>s+(b.total_pages||0),0)+reading.reduce((s,b)=>s+(b.current_page||0),0);
-  document.getElementById('libraryStats').innerHTML=`<div class="stat-card stat-grad grad-teal"><div class="stat-label">Books Read</div><div class="stat-value">${done.length}</div></div><div class="stat-card stat-grad grad-orange"><div class="stat-label">Reading</div><div class="stat-value">${reading.length}</div></div><div class="stat-card stat-grad grad-blue"><div class="stat-label">Pages Read</div><div class="stat-value">${totalPages.toLocaleString()}</div></div><div class="stat-card stat-grad grad-purple"><div class="stat-label">Want to Read</div><div class="stat-value">${want.length}</div></div>`;
-  const renderBooks=(books,label)=>`<div><h3 style="font-size:.95rem;margin-bottom:12px">${label} (${books.length})</h3>${books.map(b=>{const pct=b.total_pages?Math.round(b.current_page/b.total_pages*100):0;return`<div class="book-card">${b.cover_url?`<img class="book-cover" src="${escHtml(b.cover_url)}" alt="">`:`<div class="book-cover" style="display:flex;align-items:center;justify-content:center;font-size:.7rem;color:var(--text3);text-align:center;padding:4px">${escHtml(b.title)}</div>`}<div class="book-info"><h4>${escHtml(b.title)}</h4><div class="author">${escHtml(b.author||'Unknown')}</div>${b.status==='reading'?`<div class="progress-bar" style="margin-bottom:4px"><div class="progress-fill" style="width:${pct}%;background:linear-gradient(90deg,#0d9488,#065f56)"></div></div><div style="font-size:.75rem;color:var(--text3)">${b.current_page||0}/${b.total_pages||'?'} (${pct}%)</div><div style="display:flex;gap:4px;margin-top:6px"><button class="btn btn-sm btn-outline" onclick="openUpdateBook('${b.id}')">Update</button><button class="btn btn-sm btn-outline" onclick="markBookDone('${b.id}')">Done</button></div>`:''}${b.status==='want_to_read'?`<button class="btn btn-sm btn-outline" onclick="startReading('${b.id}')" style="margin-top:4px">Start Reading</button>`:''}<button class="btn-icon" style="margin-top:4px" onclick="deleteBook('${b.id}')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg></button></div></div>`}).join('')||'<p style="color:var(--text3);font-size:.85rem">Empty</p>'}</div>`;
+  const catFilter=(document.getElementById('libCategoryFilter')||{}).value||'';
+  const filtered=catFilter?allBooks.filter(b=>b.category===catFilter):allBooks;
+  const reading=filtered.filter(b=>b.status==='reading');const want=filtered.filter(b=>b.status==='want_to_read');const done=filtered.filter(b=>b.status==='completed');
+  const totalPages=allBooks.filter(b=>b.status==='completed').reduce((s,b)=>s+(b.total_pages||0),0)+allBooks.filter(b=>b.status==='reading').reduce((s,b)=>s+(b.current_page||0),0);
+  // Reading streak: count consecutive days with any reading book having progress (simplified: days with updated_at on reading books)
+  let readStreak=0;for(let i=0;i<365;i++){const d=addDays(new Date(),-i).toISOString().split('T')[0];const hasActivity=allBooks.some(b=>b.status==='reading'&&b.updated_at&&b.updated_at.startsWith(d));if(hasActivity||i===0&&reading.length>0)readStreak++;else if(i>0)break}
+  document.getElementById('libraryStats').innerHTML=`<div class="stat-card stat-grad grad-teal"><div class="stat-label">Books Read</div><div class="stat-value">${allBooks.filter(b=>b.status==='completed').length}</div></div><div class="stat-card stat-grad grad-orange"><div class="stat-label">Reading</div><div class="stat-value">${allBooks.filter(b=>b.status==='reading').length}</div></div><div class="stat-card stat-grad grad-blue"><div class="stat-label">Pages Read</div><div class="stat-value">${totalPages.toLocaleString()}</div></div><div class="stat-card stat-grad grad-green"><div class="stat-label">Reading Streak</div><div class="stat-value">${readStreak} days</div></div>`;
+  const starHtml=(rating)=>{if(!rating)return'';return'<div style="margin-top:2px">'+[1,2,3,4,5].map(i=>`<span style="color:${i<=rating?'#f39c12':'var(--border)'}">&#9733;</span>`).join('')+'</div>'};
+  const renderBooks=(books,label)=>`<div><h3 style="font-size:.95rem;margin-bottom:12px">${label} (${books.length})</h3>${books.map(b=>{const pct=b.total_pages?Math.round(b.current_page/b.total_pages*100):0;return`<div class="book-card">${b.cover_url?`<img class="book-cover" src="${escHtml(b.cover_url)}" alt="">`:`<div class="book-cover" style="display:flex;align-items:center;justify-content:center;font-size:.7rem;color:var(--text3);text-align:center;padding:4px">${escHtml(b.title)}</div>`}<div class="book-info"><h4>${escHtml(b.title)}</h4><div class="author">${escHtml(b.author||'Unknown')}</div>${b.category?`<span class="badge badge-category">${escHtml(b.category)}</span>`:''} ${starHtml(b.rating)}${b.status==='reading'?`<div class="progress-bar" style="margin-bottom:4px;margin-top:6px"><div class="progress-fill" style="width:${pct}%;background:linear-gradient(90deg,#0d9488,#065f56)"></div></div><div style="font-size:.75rem;color:var(--text3)">${b.current_page||0}/${b.total_pages||'?'} (${pct}%)</div><div style="display:flex;gap:4px;margin-top:6px"><button class="btn btn-sm btn-outline" onclick="openUpdateBook('${b.id}')">Update</button><button class="btn btn-sm btn-outline" onclick="markBookDone('${b.id}')">Done</button></div>`:''}${b.status==='want_to_read'?`<button class="btn btn-sm btn-outline" onclick="startReading('${b.id}')" style="margin-top:4px">Start Reading</button>`:''} ${b.notes?`<div style="font-size:.75rem;color:var(--text2);margin-top:4px;font-style:italic">${escHtml(b.notes).substring(0,80)}${b.notes.length>80?'...':''}</div>`:''}<button class="btn-icon" style="margin-top:4px" onclick="deleteBook('${b.id}')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg></button></div></div>`}).join('')||'<p style="color:var(--text3);font-size:.85rem">Empty</p>'}</div>`;
   document.getElementById('libraryContent').innerHTML=renderBooks(reading,'Currently Reading')+renderBooks(want,'Want to Read')+renderBooks(done,'Completed');
 }
-function openBookModal(){openModal(`<h3>Add Book</h3><div class="form-group"><label>Title</label><input type="text" id="mBookTitle"></div><div class="form-group"><label>Author</label><input type="text" id="mBookAuthor"></div><div class="form-row"><div class="form-group"><label>Total Pages</label><input type="number" id="mBookPages"></div><div class="form-group"><label>Status</label><select id="mBookStatus"><option value="want_to_read">Want to Read</option><option value="reading">Currently Reading</option><option value="completed">Completed</option></select></div></div><div class="form-group"><label>Cover URL (optional)</label><input type="text" id="mBookCover" placeholder="https://..."></div><div class="form-actions"><button class="btn btn-outline" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="saveBook()">Save</button></div>`)}
-async function saveBook(){const data={title:document.getElementById('mBookTitle').value.trim(),author:document.getElementById('mBookAuthor').value.trim()||null,total_pages:Number(document.getElementById('mBookPages').value)||null,status:document.getElementById('mBookStatus').value,cover_url:document.getElementById('mBookCover').value.trim()||null};if(!data.title)return toast('Title required',true);const r=await sbPost('books',data);allBooks.unshift(r[0]);closeModal();renderLibrary();toast('Book added!')}
+const bookCategories=['Fiction','Non-Fiction','Self-Help','Business','Science','Technology','Biography','Other'];
+function openBookModal(){openModal(`<h3>Add Book</h3><div class="form-group"><label>Title</label><input type="text" id="mBookTitle"></div><div class="form-group"><label>Author</label><input type="text" id="mBookAuthor"></div><div class="form-row"><div class="form-group"><label>Total Pages</label><input type="number" id="mBookPages"></div><div class="form-group"><label>Status</label><select id="mBookStatus"><option value="want_to_read">Want to Read</option><option value="reading">Currently Reading</option><option value="completed">Completed</option></select></div></div><div class="form-row"><div class="form-group"><label>Category</label><select id="mBookCategory"><option value="">Select...</option>${bookCategories.map(c=>`<option value="${c}">${c}</option>`).join('')}</select></div><div class="form-group"><label>Rating</label><div class="star-rating" id="mBookRating">${[1,2,3,4,5].map(i=>`<span class="star" data-val="${i}" onclick="setBookRating(${i})">&#9733;</span>`).join('')}</div></div></div><div class="form-group"><label>Notes</label><textarea id="mBookNotes" rows="3" placeholder="Your thoughts on this book..."></textarea></div><div class="form-group"><label>Cover URL (optional)</label><input type="text" id="mBookCover" placeholder="https://..."></div><div class="form-actions"><button class="btn btn-outline" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="saveBook()">Save</button></div>`)}
+let bookRatingVal=0;
+function setBookRating(val){bookRatingVal=val;document.querySelectorAll('#mBookRating .star').forEach(s=>{s.classList.toggle('filled',parseInt(s.dataset.val)<=val)})}
+async function saveBook(){const data={title:document.getElementById('mBookTitle').value.trim(),author:document.getElementById('mBookAuthor').value.trim()||null,total_pages:Number(document.getElementById('mBookPages').value)||null,status:document.getElementById('mBookStatus').value,cover_url:document.getElementById('mBookCover').value.trim()||null,category:document.getElementById('mBookCategory').value||null,notes:document.getElementById('mBookNotes').value.trim()||null,rating:bookRatingVal||null};if(!data.title)return toast('Title required',true);const r=await sbPost('books',data);allBooks.unshift(r[0]);bookRatingVal=0;closeModal();renderLibrary();toast('Book added!')}
 function openUpdateBook(id){const b=allBooks.find(x=>x.id===id);openModal(`<h3>Update: ${escHtml(b.title)}</h3><div class="form-group"><label>Current Page</label><input type="number" id="mBookPage" value="${b.current_page||0}"></div><div class="form-actions"><button class="btn btn-outline" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="updateBookPage('${id}')">Update</button></div>`)}
 async function updateBookPage(id){const page=Number(document.getElementById('mBookPage').value);const b=allBooks.find(x=>x.id===id);b.current_page=page;await sbPatch('books',`id=eq.${id}`,{current_page:page});closeModal();renderLibrary();toast('Updated!')}
 async function startReading(id){const b=allBooks.find(x=>x.id===id);b.status='reading';await sbPatch('books',`id=eq.${id}`,{status:'reading'});renderLibrary();toast('Happy reading!')}
@@ -1174,10 +1281,10 @@ async function saveBudget(){const amt=Number(document.getElementById('mBudgetAmt
 /* ===== HEALTH ===== */
 function renderHealth(){
   const today=todayStr();const todayLog=healthLogs.find(h=>h.date===today);
-  if(todayLog){document.getElementById('hSteps').value=todayLog.steps||'';document.getElementById('hWeight').value=todayLog.weight||'';document.getElementById('hSleep').value=todayLog.sleep_hours||'';document.getElementById('hWater').value=todayLog.water_glasses||'';document.getElementById('hNote').value=todayLog.note||''}
+  if(todayLog){document.getElementById('hSteps').value=todayLog.steps||'';document.getElementById('hWeight').value=todayLog.weight||'';document.getElementById('hSleep').value=todayLog.sleep_hours||'';document.getElementById('hWater').value=todayLog.water_glasses||'';document.getElementById('hExercise').value=todayLog.exercise_minutes||'';document.getElementById('hNote').value=todayLog.note||''}
   const last7=healthLogs.filter(h=>{const d=daysBetween(h.date,today);return d>=0&&d<7});
   const avg=(arr,key)=>{const vals=arr.filter(a=>a[key]!=null).map(a=>Number(a[key]));return vals.length?Math.round(vals.reduce((s,v)=>s+v,0)/vals.length*10)/10:'-'};
-  document.getElementById('healthAvg').innerHTML=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><div style="padding:14px;background:var(--bg3);border-radius:var(--radius2);text-align:center"><div style="font-size:.78rem;color:var(--text3)">Avg Steps</div><div style="font-size:1.3rem;font-weight:700">${avg(last7,'steps')}</div></div><div style="padding:14px;background:var(--bg3);border-radius:var(--radius2);text-align:center"><div style="font-size:.78rem;color:var(--text3)">Avg Sleep</div><div style="font-size:1.3rem;font-weight:700">${avg(last7,'sleep_hours')}h</div></div><div style="padding:14px;background:var(--bg3);border-radius:var(--radius2);text-align:center"><div style="font-size:.78rem;color:var(--text3)">Avg Weight</div><div style="font-size:1.3rem;font-weight:700">${avg(last7,'weight')}kg</div></div><div style="padding:14px;background:var(--bg3);border-radius:var(--radius2);text-align:center"><div style="font-size:.78rem;color:var(--text3)">Avg Water</div><div style="font-size:1.3rem;font-weight:700">${avg(last7,'water_glasses')}</div></div></div>`;
+  document.getElementById('healthAvg').innerHTML=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><div style="padding:14px;background:var(--bg3);border-radius:var(--radius2);text-align:center"><div style="font-size:.78rem;color:var(--text3)">Avg Steps</div><div style="font-size:1.3rem;font-weight:700">${avg(last7,'steps')}</div></div><div style="padding:14px;background:var(--bg3);border-radius:var(--radius2);text-align:center"><div style="font-size:.78rem;color:var(--text3)">Avg Sleep</div><div style="font-size:1.3rem;font-weight:700">${avg(last7,'sleep_hours')}h</div></div><div style="padding:14px;background:var(--bg3);border-radius:var(--radius2);text-align:center"><div style="font-size:.78rem;color:var(--text3)">Avg Weight</div><div style="font-size:1.3rem;font-weight:700">${avg(last7,'weight')}kg</div></div><div style="padding:14px;background:var(--bg3);border-radius:var(--radius2);text-align:center"><div style="font-size:.78rem;color:var(--text3)">Avg Water</div><div style="font-size:1.3rem;font-weight:700">${avg(last7,'water_glasses')}</div></div><div style="padding:14px;background:var(--bg3);border-radius:var(--radius2);text-align:center;grid-column:1/-1"><div style="font-size:.78rem;color:var(--text3)">Avg Exercise</div><div style="font-size:1.3rem;font-weight:700">${avg(last7,'exercise_minutes')} min</div></div></div>`;
   const last30=healthLogs.filter(h=>{const d=daysBetween(h.date,today);return d>=0&&d<30}).reverse();
   const stepsData=last30.map(h=>h.steps||0),sleepData=last30.map(h=>h.sleep_hours||0),dateLabels=last30.map(h=>h.date.substring(5));
   document.getElementById('healthStepsChart').innerHTML=stepsData.length?svgAreaChart(500,160,stepsData,'#0d9488','#0d9488',true,dateLabels):'<p style="color:var(--text3);font-size:.85rem">No data</p>';
@@ -1203,9 +1310,9 @@ function renderHealth(){
   }else{document.getElementById('healthScoreSection').innerHTML='<p style="color:var(--text3);font-size:.85rem">Log health data to see your score</p>'}
 
   const sorted=[...healthLogs].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,30);
-  document.getElementById('healthHistory').innerHTML=sorted.length?`<table class="data-table"><thead><tr><th>Date</th><th>Steps</th><th>Weight</th><th>Sleep</th><th>Water</th><th>Notes</th></tr></thead><tbody>${sorted.map(h=>`<tr><td>${fmtDate(h.date).split(',').slice(0,2).join(',')}</td><td>${h.steps!=null?h.steps.toLocaleString():'-'}</td><td>${h.weight!=null?h.weight+'kg':'-'}</td><td>${h.sleep_hours!=null?h.sleep_hours+'h':'-'}</td><td>${h.water_glasses!=null?h.water_glasses:'-'}</td><td style="color:var(--text3)">${escHtml(h.note||'-')}</td></tr>`).join('')}</tbody></table>`:'<p style="color:var(--text3);text-align:center;padding:20px">No health logs yet</p>';
+  document.getElementById('healthHistory').innerHTML=sorted.length?`<table class="data-table"><thead><tr><th>Date</th><th>Steps</th><th>Weight</th><th>Sleep</th><th>Water</th><th>Exercise</th><th>Notes</th></tr></thead><tbody>${sorted.map(h=>`<tr><td>${fmtDate(h.date).split(',').slice(0,2).join(',')}</td><td>${h.steps!=null?h.steps.toLocaleString():'-'}</td><td>${h.weight!=null?h.weight+'kg':'-'}</td><td>${h.sleep_hours!=null?h.sleep_hours+'h':'-'}</td><td>${h.water_glasses!=null?h.water_glasses:'-'}</td><td>${h.exercise_minutes!=null?h.exercise_minutes+'min':'-'}</td><td style="color:var(--text3)">${escHtml(h.note||'-')}</td></tr>`).join('')}</tbody></table>`:'<p style="color:var(--text3);text-align:center;padding:20px">No health logs yet</p>';
 }
-async function saveHealth(){const data={date:todayStr(),steps:Number(document.getElementById('hSteps').value)||null,weight:Number(document.getElementById('hWeight').value)||null,sleep_hours:Number(document.getElementById('hSleep').value)||null,water_glasses:Number(document.getElementById('hWater').value)||null,note:document.getElementById('hNote').value.trim()||null};const r=await sbUpsert('health_logs',data);const idx=healthLogs.findIndex(h=>h.date===data.date);if(idx>=0)healthLogs[idx]=r[0];else healthLogs.unshift(r[0]);renderHealth();toast('Health log saved!')}
+async function saveHealth(){const data={date:todayStr(),steps:Number(document.getElementById('hSteps').value)||null,weight:Number(document.getElementById('hWeight').value)||null,sleep_hours:Number(document.getElementById('hSleep').value)||null,water_glasses:Number(document.getElementById('hWater').value)||null,exercise_minutes:Number(document.getElementById('hExercise').value)||null,note:document.getElementById('hNote').value.trim()||null};const r=await sbUpsert('health_logs',data);const idx=healthLogs.findIndex(h=>h.date===data.date);if(idx>=0)healthLogs[idx]=r[0];else healthLogs.unshift(r[0]);renderHealth();toast('Health log saved!')}
 
 /* ===== PROJECTS ===== */
 function renderProjects(){
@@ -1217,7 +1324,7 @@ function renderProjects(){
     <div class="stat-card stat-grad grad-green"><div class="stat-label">Completed</div><div class="stat-value">${doneP}</div></div>
     <div class="stat-card stat-grad grad-purple"><div class="stat-label">Project Tasks</div><div class="stat-value">${doneProjTasks}/${totalProjTasks}</div><div class="stat-sub">${totalProjTasks?Math.round(doneProjTasks/totalProjTasks*100)+'% done':'none'}</div></div>`;
   const statuses=[{key:'todo',label:'To Do'},{key:'in_progress',label:'In Progress'},{key:'completed',label:'Completed'}];
-  document.getElementById('kanbanBoard').innerHTML=statuses.map(s=>{const projects=allProjects.filter(p=>p.status===s.key);return`<div class="kanban-col" ondragover="event.preventDefault()" ondrop="dropProject(event,'${s.key}')"><div class="kanban-col-title">${s.label}<span class="count">${projects.length}</span></div>${projects.map(p=>{const taskCount=allTasks.filter(t=>t.project_id===p.id).length;const doneCount=allTasks.filter(t=>t.project_id===p.id&&t.completed).length;return`<div class="kanban-card" draggable="true" ondragstart="dragProject(event,'${p.id}')"><div style="display:flex;justify-content:space-between;align-items:start"><div class="kc-title"><span class="color-dot" style="background:${catColors[p.color]||'var(--accent)'};margin-right:6px"></span>${escHtml(p.title)}</div><div style="display:flex;gap:2px"><button class="btn-icon" onclick="openProjectModal('${p.id}')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button><button class="btn-icon" onclick="deleteProject('${p.id}')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6"/></svg></button></div></div><div class="kc-meta">${taskCount} tasks${taskCount?` (${doneCount} done)`:''}</div></div>`}).join('')}</div>`}).join('');
+  document.getElementById('kanbanBoard').innerHTML=statuses.map(s=>{const projects=allProjects.filter(p=>p.status===s.key);return`<div class="kanban-col" ondragover="event.preventDefault()" ondrop="dropProject(event,'${s.key}')"><div class="kanban-col-title">${s.label}<span class="count">${projects.length}</span></div>${projects.map(p=>{const projTasks=allTasks.filter(t=>t.project_id===p.id);const taskCount=projTasks.length;const doneCount=projTasks.filter(t=>t.completed).length;const taskPct=taskCount?Math.round(doneCount/taskCount*100):0;return`<div class="kanban-card" draggable="true" ondragstart="dragProject(event,'${p.id}')"><div style="display:flex;justify-content:space-between;align-items:start"><div class="kc-title" style="cursor:pointer" onclick="toggleKanbanTasks('${p.id}')"><span class="color-dot" style="background:${catColors[p.color]||'var(--accent)'};margin-right:6px"></span>${escHtml(p.title)}</div><div style="display:flex;gap:2px"><button class="btn-icon" onclick="openProjectModal('${p.id}')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button><button class="btn-icon" onclick="deleteProject('${p.id}')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6"/></svg></button></div></div><div class="kc-meta">${taskCount} tasks${taskCount?` (${doneCount} done)`:''}</div>${taskCount?`<div class="kanban-mini-progress"><div class="progress-fill" style="width:${taskPct}%;background:linear-gradient(90deg,#0d9488,#065f56)"></div></div>`:''}<div class="kanban-tasks-list" id="kt-${p.id}">${projTasks.map(t=>`<div class="kanban-task-item"><div class="checkbox ${t.completed?'checked':''}" style="width:16px;height:16px;border-radius:4px" onclick="event.stopPropagation();toggleTask('${t.id}').then(()=>renderProjects())">${t.completed?'<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>':''}</div><span style="${t.completed?'text-decoration:line-through;color:var(--text3)':''}">${escHtml(t.title)}</span></div>`).join('')}<div class="kanban-quick-add"><input type="text" id="qta-${p.id}" placeholder="Quick add task..." onclick="event.stopPropagation()" onkeydown="if(event.key==='Enter')quickAddProjectTask('${p.id}')"><button class="btn btn-sm btn-primary" onclick="event.stopPropagation();quickAddProjectTask('${p.id}')">+</button></div></div></div>`}).join('')}</div>`}).join('');
 }
 let draggedProjectId=null;
 function dragProject(e,id){draggedProjectId=id;e.dataTransfer.effectAllowed='move'}
@@ -1225,6 +1332,205 @@ async function dropProject(e,status){e.preventDefault();if(!draggedProjectId)ret
 function openProjectModal(id){const p=id?allProjects.find(x=>x.id===id):null;const colors=['blue','red','green','orange','purple','pink','yellow'];openModal(`<h3>${p?'Edit':'Add'} Project</h3><div class="form-group"><label>Title</label><input type="text" id="mProjTitle" value="${p?escHtml(p.title):''}"></div><div class="form-row"><div class="form-group"><label>Status</label><select id="mProjStatus"><option value="todo" ${p&&p.status==='todo'?'selected':''}>To Do</option><option value="in_progress" ${p&&p.status==='in_progress'?'selected':''}>In Progress</option><option value="completed" ${p&&p.status==='completed'?'selected':''}>Completed</option></select></div><div class="form-group"><label>Color</label><select id="mProjColor">${colors.map(c=>`<option value="${c}" ${p&&p.color===c?'selected':''}>${c}</option>`).join('')}</select></div></div><div class="form-actions"><button class="btn btn-outline" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="saveProject('${id||''}')">Save</button></div>`)}
 async function saveProject(id){const data={title:document.getElementById('mProjTitle').value.trim(),status:document.getElementById('mProjStatus').value,color:document.getElementById('mProjColor').value};if(!data.title)return toast('Title required',true);if(id){await sbPatch('projects',`id=eq.${id}`,data);Object.assign(allProjects.find(p=>p.id===id),data)}else{const r=await sbPost('projects',data);allProjects.push(r[0])}closeModal();renderProjects();toast('Saved!')}
 async function deleteProject(id){if(!confirm('Delete this project?'))return;await sbDelete('projects',`id=eq.${id}`);allProjects=allProjects.filter(p=>p.id!==id);allTasks.filter(t=>t.project_id===id).forEach(t=>t.project_id=null);renderProjects();toast('Deleted')}
+
+/* ===== GLOBAL SEARCH ===== */
+function globalSearch(){
+  const q=(document.getElementById('globalSearchInput').value||'').toLowerCase().trim();
+  const container=document.getElementById('searchResults');
+  if(!q||q.length<2){container.classList.remove('show');return}
+  const results=[];
+  // Search tasks
+  allTasks.forEach(t=>{if(t.title.toLowerCase().includes(q))results.push({type:'Task',title:t.title,sub:t.priority+' priority'+(t.completed?' (done)':''),page:'tasks'})});
+  // Search journal
+  allJournals.forEach(j=>{if(j.body&&j.body.toLowerCase().includes(q))results.push({type:'Journal',title:fmtDate(j.date),sub:j.body.substring(0,60)+'...',page:'journal'})});
+  // Search library
+  allBooks.forEach(b=>{if(b.title.toLowerCase().includes(q)||(b.author&&b.author.toLowerCase().includes(q)))results.push({type:'Book',title:b.title,sub:b.author||'Unknown author',page:'library'})});
+  // Search projects
+  allProjects.forEach(p=>{if(p.title.toLowerCase().includes(q))results.push({type:'Project',title:p.title,sub:p.status.replace('_',' '),page:'projects'})});
+  // Search goals
+  allGoals.forEach(g=>{if(g.title.toLowerCase().includes(q))results.push({type:'Goal',title:g.title,sub:(g.target_value?Math.round(g.current_value/g.target_value*100):0)+'% complete',page:'goals'})});
+  // Search schedule
+  schedItems.forEach(s=>{if(s.title.toLowerCase().includes(q))results.push({type:'Schedule',title:s.title,sub:fmtDate(s.date),page:'schedule'})});
+  if(results.length===0){container.innerHTML='<div class="search-result-item" style="color:var(--text3)">No results found</div>';container.classList.add('show');return}
+  container.innerHTML=results.slice(0,12).map(r=>`<div class="search-result-item" onclick="nav('${r.page}');document.getElementById('searchResults').classList.remove('show');document.getElementById('globalSearchInput').value=''"><span class="search-result-type">${escHtml(r.type)}</span><div style="flex:1"><div class="search-result-title">${escHtml(r.title)}</div><div class="search-result-sub">${escHtml(r.sub)}</div></div></div>`).join('');
+  container.classList.add('show');
+}
+// Close search on click outside
+document.addEventListener('click',e=>{if(!e.target.closest('.topbar-search'))document.getElementById('searchResults').classList.remove('show')});
+
+/* ===== NOTIFICATIONS ===== */
+let notifications=[];
+function checkNotifications(){
+  notifications=[];
+  const today=todayStr();
+  const now=new Date();
+  const dismissed=JSON.parse(localStorage.getItem('lh_notif_dismissed')||'[]');
+  // Overdue tasks
+  allTasks.filter(t=>!t.completed&&t.due_date&&t.due_date<today).forEach(t=>{
+    const nid='task_overdue_'+t.id;
+    if(!dismissed.includes(nid))notifications.push({id:nid,type:'overdue',title:'Overdue: '+t.title,sub:'Due '+fmtDate(t.due_date),color:'var(--red)',page:'tasks'})
+  });
+  // Schedule items in next 30 minutes
+  const todaySched=schedItems.filter(s=>s.date===today&&!s.completed&&s.time);
+  todaySched.forEach(s=>{
+    const[h,m]=s.time.split(':').map(Number);
+    const itemTime=new Date(now.getFullYear(),now.getMonth(),now.getDate(),h,m);
+    const diffMin=(itemTime-now)/60000;
+    if(diffMin>0&&diffMin<=30){
+      const nid='sched_soon_'+s.id;
+      if(!dismissed.includes(nid))notifications.push({id:nid,type:'upcoming',title:s.title,sub:'In '+Math.round(diffMin)+' minutes',color:'var(--orange)',page:'schedule'})
+    }
+  });
+  // Schedule items with reminders
+  todaySched.forEach(s=>{
+    if(!s.reminder_minutes||!s.time)return;
+    const[h,m]=s.time.split(':').map(Number);
+    const itemTime=new Date(now.getFullYear(),now.getMonth(),now.getDate(),h,m);
+    const diffMin=(itemTime-now)/60000;
+    if(diffMin>0&&diffMin<=s.reminder_minutes){
+      const nid='sched_remind_'+s.id;
+      if(!dismissed.includes(nid))notifications.push({id:nid,type:'reminder',title:'Reminder: '+s.title,sub:'Starts in '+Math.round(diffMin)+' min',color:'var(--blue)',page:'schedule'})
+    }
+  });
+  updateNotifBadge();
+}
+function updateNotifBadge(){
+  const badge=document.getElementById('notifBadge');
+  if(notifications.length>0){badge.style.display='flex';badge.classList.remove('topbar-notif');badge.classList.add('notif-badge');badge.textContent=notifications.length}
+  else{badge.style.display='none'}
+}
+function toggleNotifDropdown(){
+  const dd=document.getElementById('notifDropdown');
+  dd.classList.toggle('show');
+  renderNotifDropdown();
+}
+function renderNotifDropdown(){
+  const dd=document.getElementById('notifDropdown');
+  if(!notifications.length){dd.innerHTML='<div class="notif-header">Notifications</div><div class="notif-empty">All clear! No notifications.</div>';return}
+  dd.innerHTML='<div class="notif-header"><span>Notifications</span><button class="btn btn-sm btn-outline" onclick="event.stopPropagation();dismissAllNotifs()">Clear all</button></div>'+notifications.map(n=>`<div class="notif-item" onclick="event.stopPropagation();nav('${n.page}');document.getElementById('notifDropdown').classList.remove('show')"><div class="notif-dot" style="background:${n.color}"></div><div class="notif-text"><div class="nt-title">${escHtml(n.title)}</div><div class="nt-sub">${escHtml(n.sub)}</div></div><button class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('${n.id}')" title="Dismiss"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>`).join('');
+}
+function dismissNotif(nid){
+  const dismissed=JSON.parse(localStorage.getItem('lh_notif_dismissed')||'[]');
+  dismissed.push(nid);localStorage.setItem('lh_notif_dismissed',JSON.stringify(dismissed));
+  notifications=notifications.filter(n=>n.id!==nid);updateNotifBadge();renderNotifDropdown();
+}
+function dismissAllNotifs(){
+  const dismissed=JSON.parse(localStorage.getItem('lh_notif_dismissed')||'[]');
+  notifications.forEach(n=>dismissed.push(n.id));localStorage.setItem('lh_notif_dismissed',JSON.stringify(dismissed));
+  notifications=[];updateNotifBadge();renderNotifDropdown();
+}
+// Close notif dropdown on outside click
+document.addEventListener('click',e=>{if(!e.target.closest('#notifBell'))document.getElementById('notifDropdown').classList.remove('show')});
+
+/* ===== WEEKLY REVIEW ===== */
+let reviewWeekStart=getMonday(new Date());
+function shiftReviewWeek(n){reviewWeekStart=addDays(reviewWeekStart,n*7);renderReview()}
+function setReviewWeekToNow(){reviewWeekStart=getMonday(new Date());renderReview()}
+
+function renderReview(){
+  const ws=new Date(reviewWeekStart);const we=addDays(ws,6);
+  const wsStr=ws.toISOString().split('T')[0];const weStr=we.toISOString().split('T')[0];
+  document.getElementById('reviewWeekLabel').textContent=fmtDate(wsStr).split(',').slice(0,2).join(',')+' - '+fmtDate(weStr).split(',').slice(0,2).join(',');
+
+  // Gather week data
+  const weekDates=[];for(let i=0;i<7;i++)weekDates.push(addDays(ws,i).toISOString().split('T')[0]);
+
+  // Tasks
+  const weekTasksDone=allTasks.filter(t=>t.completed&&t.updated_at&&weekDates.some(d=>t.updated_at.startsWith(d))).length;
+  const weekTasksTotal=allTasks.filter(t=>weekDates.some(d=>(t.created_at&&t.created_at.startsWith(d))||(t.updated_at&&t.updated_at.startsWith(d)))).length||weekTasksDone;
+
+  // Habits
+  const activeHabits=allHabits.filter(h=>h.active);
+  const weekHabitsDone=habitLogs.filter(l=>weekDates.includes(l.date)&&l.completed).length;
+  const weekHabitsTotal=activeHabits.length*7;
+  const habitRate=weekHabitsTotal?Math.round(weekHabitsDone/weekHabitsTotal*100):0;
+
+  // Schedule
+  const weekSched=schedItems.filter(s=>weekDates.includes(s.date));
+  const weekSchedDone=weekSched.filter(s=>s.completed).length;
+  const schedRate=weekSched.length?Math.round(weekSchedDone/weekSched.length*100):0;
+
+  // Mood
+  const weekJournals=allJournals.filter(j=>weekDates.includes(j.date));
+  const weekMoods=weekJournals.filter(j=>j.mood);
+  const avgMood=weekMoods.length?(weekMoods.reduce((s,j)=>s+(moodScores[j.mood]||3),0)/weekMoods.length).toFixed(1):0;
+  const moodEmoji=avgMood>=4.5?'😊':avgMood>=3.5?'😌':avgMood>=2.5?'😐':avgMood>=1.5?'😔':'😤';
+
+  // Finance
+  const weekFin=finEntries.filter(f=>weekDates.includes(f.date));
+  const weekIncome=weekFin.filter(f=>f.type==='income').reduce((s,f)=>s+Number(f.amount),0);
+  const weekExpense=weekFin.filter(f=>f.type==='expense').reduce((s,f)=>s+Number(f.amount),0);
+
+  // Goals movement
+  const goalsWithProgress=allGoals.filter(g=>{const pct=g.target_value?Math.round(g.current_value/g.target_value*100):0;return pct>0});
+
+  // Stats row
+  document.getElementById('reviewStats').innerHTML=`
+    <div class="stat-card stat-grad grad-teal"><div class="stat-label">Tasks Done</div><div class="stat-value">${weekTasksDone}</div><div class="stat-sub">this week</div></div>
+    <div class="stat-card stat-grad grad-orange"><div class="stat-label">Habit Rate</div><div class="stat-value">${habitRate}%</div><div class="stat-sub">${weekHabitsDone}/${weekHabitsTotal} check-ins</div></div>
+    <div class="stat-card stat-grad grad-green"><div class="stat-label">Schedule</div><div class="stat-value">${schedRate}%</div><div class="stat-sub">${weekSchedDone}/${weekSched.length} items</div></div>
+    <div class="stat-card stat-grad grad-pink"><div class="stat-label">Avg Mood</div><div class="stat-value">${moodEmoji} ${avgMood||'--'}</div><div class="stat-sub">${weekJournals.length} journal entries</div></div>`;
+
+  // Task completion donut
+  const taskDonePct=weekTasksDone>0?100:0;
+  document.getElementById('reviewTaskChart').innerHTML=`<div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap"><div>${svgDonut(130,14,[{pct:weekTasksTotal?weekTasksDone/Math.max(weekTasksTotal,weekTasksDone)*100:0,color:'#0d9488'},{pct:weekTasksTotal?Math.max(0,(weekTasksTotal-weekTasksDone))/Math.max(weekTasksTotal,weekTasksDone)*100:100,color:'var(--bg3)'}],`<span class="donut-val">${weekTasksDone}</span><span class="donut-label">done</span>`)}</div><div><div style="font-size:.85rem;color:var(--text2);margin-bottom:4px">${weekTasksDone} tasks completed this week</div></div></div>`;
+
+  // Habit completion donut
+  document.getElementById('reviewHabitChart').innerHTML=`<div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap"><div>${svgDonut(130,14,[{pct:habitRate,color:'#f39c12'},{pct:100-habitRate,color:'var(--bg3)'}],`<span class="donut-val">${habitRate}%</span><span class="donut-label">rate</span>`)}</div><div><div style="font-size:.85rem;color:var(--text2);margin-bottom:4px">${weekHabitsDone} of ${weekHabitsTotal} possible check-ins</div>${activeHabits.slice(0,5).map(h=>{const done=habitLogs.filter(l=>weekDates.includes(l.date)&&l.habit_id===h.id&&l.completed).length;return`<div style="font-size:.78rem;color:var(--text3)">${escHtml(h.name)}: ${done}/7</div>`}).join('')}</div></div>`;
+
+  // Goals section
+  if(goalsWithProgress.length){
+    const goalColors=['#0d9488','#f39c12','#e84393','#3498db','#9b59b6','#27ae60'];
+    document.getElementById('reviewGoalsSection').innerHTML=goalsWithProgress.map((g,i)=>{const pct=g.target_value?Math.round(g.current_value/g.target_value*100):0;return`<div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:.85rem;margin-bottom:4px"><span>${escHtml(g.title)}</span><span style="font-weight:600;color:${goalColors[i%goalColors.length]}">${pct}%</span></div><div class="progress-bar" style="height:6px"><div class="progress-fill" style="width:${Math.min(pct,100)}%;background:${goalColors[i%goalColors.length]}"></div></div></div>`}).join('');
+  }else{document.getElementById('reviewGoalsSection').innerHTML='<p style="color:var(--text3);font-size:.85rem">No active goals with progress</p>'}
+
+  // Finance section
+  document.getElementById('reviewFinSection').innerHTML=`<div style="display:flex;gap:16px;flex-wrap:wrap"><div style="flex:1;min-width:120px;padding:14px;background:var(--bg3);border-radius:var(--radius2);text-align:center"><div style="font-size:.78rem;color:var(--text3)">Income</div><div style="font-size:1.2rem;font-weight:700;color:var(--green)">$${weekIncome.toLocaleString()}</div></div><div style="flex:1;min-width:120px;padding:14px;background:var(--bg3);border-radius:var(--radius2);text-align:center"><div style="font-size:.78rem;color:var(--text3)">Expenses</div><div style="font-size:1.2rem;font-weight:700;color:var(--red)">$${weekExpense.toLocaleString()}</div></div><div style="flex:1;min-width:120px;padding:14px;background:var(--bg3);border-radius:var(--radius2);text-align:center"><div style="font-size:.78rem;color:var(--text3)">Net</div><div style="font-size:1.2rem;font-weight:700;color:${weekIncome-weekExpense>=0?'var(--green)':'var(--red)'}">$${(weekIncome-weekExpense).toLocaleString()}</div></div></div>`;
+
+  // Schedule overview chart - completion per day
+  const schedDayData=weekDates.map(d=>{const di=schedItems.filter(s=>s.date===d);return di.length?Math.round(di.filter(s=>s.completed).length/di.length*100):0});
+  const dayLabels2=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  document.getElementById('reviewScheduleChart').innerHTML=svgAreaChart(500,140,schedDayData,'#0d9488','#0d9488',true,dayLabels2)+`<div style="font-size:.78rem;color:var(--text2);margin-top:6px">Daily schedule completion rate (%). Average: ${Math.round(schedDayData.reduce((s,v)=>s+v,0)/7)}%</div>`;
+
+  // Load saved notes
+  loadReviewNotes(wsStr);
+}
+
+async function loadReviewNotes(weekStart){
+  try{const data=await sbGet('weekly_reviews',`week_start=eq.${weekStart}`);
+  if(data&&data.length)document.getElementById('reviewNotes').value=data[0].notes||'';
+  else document.getElementById('reviewNotes').value=''}catch(e){document.getElementById('reviewNotes').value=''}
+}
+async function saveReviewNotes(){
+  const wsStr=new Date(reviewWeekStart).toISOString().split('T')[0];
+  const notes=document.getElementById('reviewNotes').value.trim();
+  try{await sbUpsert('weekly_reviews',{week_start:wsStr,notes});toast('Review notes saved!')}catch(e){toast('Could not save notes (table may not exist yet)',true)}
+}
+
+/* ===== PROJECT INLINE TASKS ===== */
+function toggleKanbanTasks(projId){
+  const el=document.getElementById('kt-'+projId);
+  if(el)el.classList.toggle('show');
+}
+async function quickAddProjectTask(projId){
+  const input=document.getElementById('qta-'+projId);
+  const title=input.value.trim();
+  if(!title)return;
+  const data={title,project_id:projId,priority:'medium'};
+  const r=await sbPost('tasks',data);allTasks.push(r[0]);
+  input.value='';renderProjects();toast('Task added!');
+}
+
+/* ===== INIT UPDATES ===== */
+const origInitApp=initApp;
+async function initAppWithNotifs(){
+  await origInitApp();
+  checkNotifications();
+  // Re-check notifications every 60 seconds
+  setInterval(checkNotifications,60000);
+}
+// Override initApp
+initApp=initAppWithNotifs;
 
 if(sessionStorage.getItem('lh_auth')==='1'){document.getElementById('pinScreen').classList.add('hidden');initApp()}
 </script>
